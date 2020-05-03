@@ -1,0 +1,31 @@
+ALTER TABLE zakupy
+ADD COLUMN data DATETIME;
+
+
+UPDATE zakupy SET data=('2020-04-30 11:51')
+WHERE id = 1;
+UPDATE zakupy SET data= NOW()
+WHERE id = 2;
+UPDATE zakupy SET data=DATE_SUB(NOW(), INTERVAL 10 DAY)
+WHERE id = 3;
+UPDATE zakupy SET data=DATE_ADD(NOW(), INTERVAL 5 DAY)
+WHERE id = 4;
+UPDATE zakupy SET data=('2016-01-05 16:13:15')
+WHERE id = 5;
+
+
+
+SELECT * FROM zakupy
+WHERE  EXTRACT(DAY FROM data) <16;
+
+
+SELECT * FROM zakupy
+WHERE data > DATE_SUB(NOW(), INTERVAL 30 DAY);
+
+
+SELECT * FROM zakupy
+WHERE  TIME_TO_SEC(data) > TIME_TO_SEC('20:00:00');
+
+
+SELECT * FROM zakupy
+ORDER BY data DESC;
